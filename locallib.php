@@ -176,7 +176,7 @@ function restrict_admin_page() {
 }
 
 /**
- * Restrict admin sections, if set
+ * Restrict admin settings sections, if set
  * @param mixed $courseorid
  * @throws \moodle_exception
  * @return void
@@ -205,6 +205,35 @@ function restrict_admin_settings_section($courseorid = null) {
     }
 }
 
+/**
+ * Restrict admin settings categories, if set
+ * @param mixed $courseorid
+ * @throws \moodle_exception
+ * @return void
+ */
+function restrict_admin_settings_category($courseorid = null) {
+    global $FULLME;
+
+    // If not admin context, nothing to do.
+    if (!is_int($courseorid) || $courseorid !== 0) {
+        return;
+    }
+
+    $config = get_config('local_tier');
+    // If no restrictedadminsettingscategory set, nothing to do.
+    if (empty($config->restrictedadminsettingscategories)) {
+        return;
+    }
+
+    // Parse category param.
+    $restrictedadminsettingscategories = $config->restrictedadminsettingscategories;
+    $querystring = parse_url($FULLME, PHP_URL_QUERY);
+    parse_str($querystring, $params);
+
+    if (isset($params['category']) && in_array($params['category'], explode(",", $restrictedadminsettingscategories))) {
+        throw new moodle_exception('restrictedadminsettingscategory', 'local_tier');
+    }
+}
 
 /**
  * Convert bytes to gigabytes

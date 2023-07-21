@@ -54,5 +54,6 @@ function local_tier_pre_user_create($user) {
  */
 function local_tier_after_require_login($courseorid) {
     restrict_admin_settings_section($courseorid);
+    restrict_admin_settings_category($courseorid);
     restrict_admin_page();
 }
