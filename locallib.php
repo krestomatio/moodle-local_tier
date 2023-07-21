@@ -93,7 +93,6 @@ function check_max_registered_users($user) {
  * Calculate total storage in bytes
  * @return void
  */
-/** */
 function set_total_storage() {
     global $CFG,$DB;
 
@@ -149,7 +148,6 @@ function get_total_registered_users() {
 
 /**
  * Restrict admin pages, if set
- * @param mixed $courseorid
  * @throws \moodle_exception
  * @return void
  */
