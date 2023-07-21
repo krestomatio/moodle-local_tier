@@ -45,7 +45,7 @@ class total_storage_task extends \core\task\scheduled_task {
      * @return string
      */
     public function get_name() {
-        return get_string('total_storage_task_name', 'local_tier');
+        return get_string('totalstoragetaskname', 'local_tier');
     }
 
     /**

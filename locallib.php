@@ -23,8 +23,6 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Check if max storage has been reached
  * @param mixed $newrecord
@@ -35,7 +33,7 @@ defined('MOODLE_INTERNAL') || die();
 function check_max_storage($newrecord, $pathname = null) {
     global $DB;
 
-    // if empty pathname, nothing to do
+    // If empty pathname, nothing to do.
     $filepath = $pathname["pathname"];
     if (!$filepath) {
         return;
@@ -48,18 +46,24 @@ function check_max_storage($newrecord, $pathname = null) {
     }
 
     $config = get_config('local_tier');
-    // if max storage not set, nothing to do
-    if (empty($config->max_storage_bytes)) {
+    // If max storage not set, nothing to do.
+    if (empty($config->maxstoragebytes)) {
         return;
     }
 
-    $max_storage_bytes = $config->max_storage_bytes;
-    $total_storage_bytes = $config->total_storage_bytes;
-    $proyected_total_storage_bytes = $filesize + $total_storage_bytes;
+    $maxstoragebytes = $config->maxstoragebytes;
+    $totalstoragebytes = $config->totalstoragebytes;
+    $proyectedtotalstoragebytes = $filesize + $totalstoragebytes;
 
-    // Check if max storage reached, if so trow an error, else calculate new total storage
-    if ($proyected_total_storage_bytes >= $max_storage_bytes) {
-        throw new moodle_exception('error_maxstorageuploadfailed', 'local_tier', '', array('max_storage_bytes' => $max_storage_bytes, 'filename' => $filename, 'filesize' => $filesize,  'total_storage_bytes' => $total_storage_bytes));
+    // Check if max storage reached, if so trow an error,
+    // else calculate new total storage.
+    if ($proyectedtotalstoragebytes >= $maxstoragebytes) {
+        throw new moodle_exception('errormaxstorageuploadfailed', 'local_tier', '', array(
+            'maxstoragebytes' => $maxstoragebytes,
+            'filename' => $filename,
+            'filesize' => $filesize,
+            'totalstoragebytes' => $totalstoragebytes
+        ));
     }
 }
 
@@ -70,22 +74,26 @@ function check_max_storage($newrecord, $pathname = null) {
  * @return void
  */
 function check_max_registered_users($user) {
-    if(!$user){
+    if (!$user) {
         return;
     }
 
     $config = get_config('local_tier');
-    // if max storage not set, nothing to do
-    if (empty($config->max_registered_users)) {
+    // If max storage not set, nothing to do.
+    if (empty($config->maxregisteredusers)) {
         return;
     }
 
-    $max_registered_users = $config->max_registered_users;
-    $total_registered_users = get_total_registered_users();
+    $maxregisteredusers = $config->maxregisteredusers;
+    $totalregisteredusers = get_total_registered_users();
 
-    // Check if max storage reached, if so trow an error, else calculate new total storage
-    if ($total_registered_users >= $max_registered_users) {
-        throw new moodle_exception('error_maxstoragecreateuserfailed', 'local_tier', '', array('max_registered_users' => $max_registered_users, 'total_registered_users' => $total_registered_users));
+    // Check if max storage reached, if so trow an error,
+    // else calculate new total storage.
+    if ($totalregisteredusers >= $maxregisteredusers) {
+        throw new moodle_exception('errormaxstoragecreateuserfailed', 'local_tier', '', array(
+            'maxregisteredusers' => $maxregisteredusers,
+            'totalregisteredusers' => $totalregisteredusers
+        ));
     }
 }
 
@@ -94,17 +102,17 @@ function check_max_registered_users($user) {
  * @return void
  */
 function set_total_storage() {
-    global $CFG,$DB;
+    global $CFG, $DB;
 
-    # get total files in bytes from moodle database
-    $files_bytes = get_total_files();
+    // Get total files in bytes from moodle database.
+    $filesbytes = get_total_files();
 
-    # get total database size in bytes
-    $database_bytes = get_total_database();
+    // Get total database size in bytes.
+    $databasebytes = get_total_database();
 
-    set_config('total_files_bytes', $files_bytes, 'local_tier');
-    set_config('total_database_bytes', $database_bytes, 'local_tier');
-    set_config('total_storage_bytes', $files_bytes+$database_bytes, 'local_tier');
+    set_config('total_filesbytes', $filesbytes, 'local_tier');
+    set_config('total_databasebytes', $databasebytes, 'local_tier');
+    set_config('totalstoragebytes', $filesbytes + $databasebytes, 'local_tier');
 }
 
 /**
@@ -114,11 +122,11 @@ function set_total_storage() {
 function get_total_files() {
     global $DB;
 
-    $files_bytes_sql = "SELECT SUM(d.filesize) AS value
+    $filesbytessql = "SELECT SUM(d.filesize) AS value
                         FROM (SELECT DISTINCT f.contenthash, f.filesize
                         FROM {files} f) d";
 
-    return $DB->get_field_sql($files_bytes_sql);
+    return $DB->get_field_sql($filesbytessql);
 }
 
 /**
@@ -126,11 +134,11 @@ function get_total_files() {
  * @return mixed
  */
 function get_total_database() {
-    global $CFG,$DB;
+    global $CFG, $DB;
 
-    $database_bytes_sql = "SELECT pg_database_size(?)";
+    $databasebytessql = "SELECT pg_database_size(?)";
 
-    return $DB->get_field_sql($database_bytes_sql,[$CFG->dbname]);
+    return $DB->get_field_sql($databasebytessql, [$CFG->dbname]);
 }
 
 /**
@@ -140,10 +148,10 @@ function get_total_database() {
 function get_total_registered_users() {
     global $DB;
 
-    # get registered users (minus delete ones, guest and admin)
-    $registered_users_sql = "SELECT COUNT(id) FROM {user} WHERE deleted = 0 AND id > 2";
+    // Get registered users (minus delete ones, guest and admin).
+    $registereduserssql = "SELECT COUNT(id) FROM {user} WHERE deleted = 0 AND id > 2";
 
-    return (int) $DB->get_field_sql($registered_users_sql);
+    return (int) $DB->get_field_sql($registereduserssql);
 }
 
 /**
@@ -151,16 +159,15 @@ function get_total_registered_users() {
  * @throws \moodle_exception
  * @return void
  */
-function restrict_admin_page(){
+function restrict_admin_page() {
     global $SCRIPT;
 
     $config = get_config('local_tier');
-    // if no restrictedadminsettingssection set, nothing to do
+    // If no restrictedadminsettingssection set, nothing to do.
     if (empty($config->restrictedadminpages)) {
         return;
     }
 
-    // parse section param
     $restrictedadminpages = $config->restrictedadminpages;
 
     if (in_array($SCRIPT, explode(",", $restrictedadminpages))) {
@@ -174,24 +181,24 @@ function restrict_admin_page(){
  * @throws \moodle_exception
  * @return void
  */
-function restrict_admin_settings_section($courseorid = null){
+function restrict_admin_settings_section($courseorid = null) {
     global $FULLME;
 
-    // if not admin context, nothing to do
+    // If not admin context, nothing to do.
     if (!is_int($courseorid) || $courseorid !== 0) {
         return;
     }
 
     $config = get_config('local_tier');
-    // if no restrictedadminsettingssection set, nothing to do
+    // If no restrictedadminsettingssection set, nothing to do.
     if (empty($config->restrictedadminsettingssections)) {
         return;
     }
 
-    // parse section param
+    // Parse section param.
     $restrictedadminsettingssections = $config->restrictedadminsettingssections;
-    $queryString = parse_url($FULLME, PHP_URL_QUERY);
-    parse_str($queryString, $params);
+    $querystring = parse_url($FULLME, PHP_URL_QUERY);
+    parse_str($querystring, $params);
 
     if (isset($params['section']) && in_array($params['section'], explode(",", $restrictedadminsettingssections))) {
         throw new moodle_exception('restrictedadminsettingssection', 'local_tier');
@@ -204,8 +211,8 @@ function restrict_admin_settings_section($courseorid = null){
  * @param mixed $bytes
  * @return float
  */
-function convertBytesToGB($bytes) {
-    return round($bytes / 1024 / 1024 / 1024,1);
+function convert_bytes_to_gb($bytes) {
+    return round($bytes / 1024 / 1024 / 1024, 1);
 }
 
 /**
@@ -213,6 +220,6 @@ function convertBytesToGB($bytes) {
  * @param mixed $bytes
  * @return float
  */
-function convertBytesToGiB($bytes) {
-    return round($bytes / 1000 / 1000 / 1000,1);
+function convert_bytes_to_gib($bytes) {
+    return round($bytes / 1000 / 1000 / 1000, 1);
 }
