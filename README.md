@@ -6,7 +6,7 @@ Tier plugin provides a solution to control user registrations, storage quotas, a
 
 2. Site Storage Cap: Tier plugin enables administrators to assign a system wide storage quota based on total files and database size. When the storage quota is reached, users will not be able to add new files, unless storage is reduced by removing files. Total storage in used is calculated every minute in a cron schedule task, avoiding hitting the database to often.
 
-3. Admin Page/Section Restriction: The plugin allows restricting admin settings sections and/or pages access. This helps prevent misconfiguring performance and optimization-related admin settings.
+3. Admin Page/Section Restriction: The plugin allows restricting admin settings sections, categories and/or pages access. This helps prevent misconfiguring performance and optimization-related admin settings.
 
 The following example shows how to set max registered users to 100, max site storage to 5 GB (in bytes) and restrict access to debugging admin section and cache configuration and test pages. Values are set `config.php`
 
@@ -15,6 +15,7 @@ $CFG->forced_plugin_settings = [
     "local_tier" => [
         "max_storage_bytes" => "5000000000",
         "max_registered_users" => "100",
+        "restrictedadminsettingscategories" => "cachestores",
         "restrictedadminsettingssections" => "debugging",
         "restrictedadminpages" => "/cache/testperformance.php,/cache/admin.php",
     ],
