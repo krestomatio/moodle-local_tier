@@ -52,6 +52,6 @@ class total_storage_task extends \core\task\scheduled_task {
      * Run the scheduled task and store the totals.
      */
     public function execute() {
-        set_total_storage();
+        local_tier_set_total_storage();
     }
 }

@@ -35,7 +35,7 @@ require_once(__DIR__.'/locallib.php');
  * @return void
  */
 function local_tier_before_file_created($newrecord, $pathname = null, $content = null) {
-    check_max_storage($newrecord, $pathname);
+    local_tier_check_max_storage($newrecord, $pathname);
 }
 
 /**
@@ -44,7 +44,7 @@ function local_tier_before_file_created($newrecord, $pathname = null, $content =
  * @return void
  */
 function local_tier_pre_user_create($user) {
-    check_max_registered_users($user);
+    local_tier_check_max_registered_users($user);
 }
 
 /**
@@ -53,7 +53,7 @@ function local_tier_pre_user_create($user) {
  * @return void
  */
 function local_tier_after_require_login($courseorid) {
-    restrict_admin_settings_section($courseorid);
-    restrict_admin_settings_category($courseorid);
-    restrict_admin_page();
+    local_tier_restrict_admin_settings_section($courseorid);
+    local_tier_restrict_admin_settings_category($courseorid);
+    local_tier_restrict_admin_page();
 }

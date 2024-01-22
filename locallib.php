@@ -30,7 +30,7 @@
  * @throws \moodle_exception
  * @return void
  */
-function check_max_storage($newrecord, $pathname = null) {
+function local_tier_check_max_storage($newrecord, $pathname = null) {
     global $DB;
 
     // If empty pathname, nothing to do.
@@ -73,7 +73,7 @@ function check_max_storage($newrecord, $pathname = null) {
  * @throws \moodle_exception
  * @return void
  */
-function check_max_registered_users($user) {
+function local_tier_check_max_registered_users($user) {
     if (!$user) {
         return;
     }
@@ -85,7 +85,7 @@ function check_max_registered_users($user) {
     }
 
     $maxregisteredusers = $config->maxregisteredusers;
-    $totalregisteredusers = get_total_registered_users();
+    $totalregisteredusers = local_tier_get_total_registered_users();
 
     // Check if max storage reached, if so trow an error,
     // else calculate new total storage.
@@ -101,14 +101,14 @@ function check_max_registered_users($user) {
  * Calculate total storage in bytes
  * @return void
  */
-function set_total_storage() {
+function local_tier_set_total_storage() {
     global $CFG, $DB;
 
     // Get total files in bytes from moodle database.
-    $filesbytes = get_total_files();
+    $filesbytes = local_tier_get_total_files();
 
     // Get total database size in bytes.
-    $databasebytes = get_total_database();
+    $databasebytes = local_tier_get_total_database();
 
     set_config('total_filesbytes', $filesbytes, 'local_tier');
     set_config('total_databasebytes', $databasebytes, 'local_tier');
@@ -119,7 +119,7 @@ function set_total_storage() {
  * Calculate total files in bytes
  * @return mixed
  */
-function get_total_files() {
+function local_tier_get_total_files() {
     global $DB;
 
     $filesbytessql = "SELECT SUM(d.filesize) AS value
@@ -133,7 +133,7 @@ function get_total_files() {
  * Calculate total database in bytes
  * @return mixed
  */
-function get_total_database() {
+function local_tier_get_total_database() {
     global $CFG, $DB;
 
     $databasebytessql = "SELECT pg_database_size(?)";
@@ -145,7 +145,7 @@ function get_total_database() {
  * Calculate total users
  * @return int
  */
-function get_total_registered_users() {
+function local_tier_get_total_registered_users() {
     global $DB;
 
     // Get registered users (minus delete ones, guest and admin).
@@ -159,7 +159,7 @@ function get_total_registered_users() {
  * @throws \moodle_exception
  * @return void
  */
-function restrict_admin_page() {
+function local_tier_restrict_admin_page() {
     global $SCRIPT;
 
     $config = get_config('local_tier');
@@ -181,7 +181,7 @@ function restrict_admin_page() {
  * @throws \moodle_exception
  * @return void
  */
-function restrict_admin_settings_section($courseorid = null) {
+function local_tier_restrict_admin_settings_section($courseorid = null) {
     global $FULLME;
 
     // If not admin context, nothing to do.
@@ -211,7 +211,7 @@ function restrict_admin_settings_section($courseorid = null) {
  * @throws \moodle_exception
  * @return void
  */
-function restrict_admin_settings_category($courseorid = null) {
+function local_tier_restrict_admin_settings_category($courseorid = null) {
     global $FULLME;
 
     // If not admin context, nothing to do.
@@ -240,7 +240,7 @@ function restrict_admin_settings_category($courseorid = null) {
  * @param mixed $bytes
  * @return float
  */
-function convert_bytes_to_gb($bytes) {
+function local_tier_convert_bytes_to_gb($bytes) {
     return round($bytes / 1024 / 1024 / 1024, 1);
 }
 
@@ -249,6 +249,6 @@ function convert_bytes_to_gb($bytes) {
  * @param mixed $bytes
  * @return float
  */
-function convert_bytes_to_gib($bytes) {
+function local_tier_convert_bytes_to_gib($bytes) {
     return round($bytes / 1000 / 1000 / 1000, 1);
 }
