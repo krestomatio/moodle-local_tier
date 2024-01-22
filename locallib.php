@@ -58,12 +58,12 @@ function local_tier_check_max_storage($newrecord, $pathname = null) {
     // Check if max storage reached, if so trow an error,
     // else calculate new total storage.
     if ($proyectedtotalstoragebytes >= $maxstoragebytes) {
-        throw new moodle_exception('errormaxstorageuploadfailed', 'local_tier', '', array(
+        throw new moodle_exception('errormaxstorageuploadfailed', 'local_tier', '', [
             'maxstoragebytes' => $maxstoragebytes,
             'filename' => $filename,
             'filesize' => $filesize,
-            'totalstoragebytes' => $totalstoragebytes
-        ));
+            'totalstoragebytes' => $totalstoragebytes,
+        ]);
     }
 }
 
@@ -90,10 +90,10 @@ function local_tier_check_max_registered_users($user) {
     // Check if max storage reached, if so trow an error,
     // else calculate new total storage.
     if ($totalregisteredusers >= $maxregisteredusers) {
-        throw new moodle_exception('errormaxstoragecreateuserfailed', 'local_tier', '', array(
+        throw new moodle_exception('errormaxstoragecreateuserfailed', 'local_tier', '', [
             'maxregisteredusers' => $maxregisteredusers,
-            'totalregisteredusers' => $totalregisteredusers
-        ));
+            'totalregisteredusers' => $totalregisteredusers,
+        ]);
     }
 }
 
