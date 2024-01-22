@@ -29,7 +29,7 @@ $tasks = [
     [
         'classname' => 'local_tier\task\total_storage_task',
         'blocking' => 0,
-        'minute' => '*',
+        'minute' => '0',
         'hour' => '*',
         'day' => '*',
         'month' => '*',
