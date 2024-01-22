@@ -136,7 +136,20 @@ function local_tier_get_total_files() {
 function local_tier_get_total_database() {
     global $CFG, $DB;
 
-    $databasebytessql = "SELECT pg_database_size(?)";
+    switch ($CFG->dbtype) {
+        case 'mysqli':
+        case 'mariadb':
+        case 'auroramysql':
+            $databasebytessql = "SELECT SUM(data_length + index_length)
+                                  FROM information_schema.tables
+                                  WHERE table_schema = ?";
+            break;
+        case 'pgsql':
+            $databasebytessql = "SELECT pg_database_size(?)";
+            break;
+        default:
+            throw new moodle_exception('dbtypeunsupported', 'local_tier', '', ['dbtype' => $CFG->dbtype]);
+    }
 
     return $DB->get_field_sql($databasebytessql, [$CFG->dbname]);
 }

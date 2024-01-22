@@ -34,3 +34,4 @@ $string['errormaxstoragecreateuserfailed'] = 'User creation failed due to reachi
 $string['restrictedadminsettingssection'] = 'This admin settings section is currently restricted for all users as a precautionary measure to prevent misconfiguring performance and optimization-related settings';
 $string['restrictedadminsettingscategory'] = 'This admin settings category is currently restricted for all users as a precautionary measure to prevent misconfiguring performance and optimization-related settings';
 $string['restrictedadminpage'] = 'This admin settings page is currently restricted for all users as a precautionary measure to prevent misconfiguring performance and optimization-related settings';
+$string['dbtypeunsupported'] = 'Database type "{$a->dbtype}" is unsupported';
