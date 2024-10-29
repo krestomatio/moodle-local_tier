@@ -21,7 +21,7 @@ namespace local_tier\privacy;
  *
  * @package     local_tier
  * @category    privacy
- * @copyright   2022 Krestomatio <info@krestomatio.com>
+ * @copyright   2024 Krestomatio <info@krestomatio.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\null_provider {

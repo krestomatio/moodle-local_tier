@@ -18,7 +18,7 @@
  * Task schedule configuration for the local_tier plugin.
  *
  * @package    local_tier
- * @copyright  2023 Krestomatio <https://krestomatio.com/>
+ * @copyright  2024 Krestomatio <https://krestomatio.com/>
  * @author     Job Céspedes Ortiz <jobcespedes@krestomatio.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

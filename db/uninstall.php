@@ -19,7 +19,7 @@
  *
  * @package     local_tier
  * @category    upgrade
- * @copyright   2022 Krestomatio <info@krestomatio.com>
+ * @copyright   2024 Krestomatio <info@krestomatio.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

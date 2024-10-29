@@ -18,7 +18,7 @@
  * Adhoc task that keep track of total storage used.
  *
  * @package    local_tier
- * @copyright  2023 Krestomatio <https://krestomatio.com/>
+ * @copyright  2024 Krestomatio <https://krestomatio.com/>
  * @author     Job Céspedes Ortiz <jobcespedes@krestomatio.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -33,7 +33,7 @@ require_once(__DIR__.'/../../locallib.php');
  * Adhoc task that keep track of total storage used.
  *
  * @package    local_tier
- * @copyright  2023 Krestomatio <https://krestomatio.com/>
+ * @copyright  2024 Krestomatio <https://krestomatio.com/>
  * @author     Job Céspedes Ortiz <jobcespedes@krestomatio.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

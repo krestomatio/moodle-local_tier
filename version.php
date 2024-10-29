@@ -18,7 +18,7 @@
  * Plugin version and other meta-data are defined here.
  *
  * @package     local_tier
- * @copyright   2022 Krestomatio <info@krestomatio.com>
+ * @copyright   2024 Krestomatio <info@krestomatio.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
