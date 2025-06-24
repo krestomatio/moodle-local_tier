@@ -18,14 +18,14 @@
  * Plugin version and other meta-data are defined here.
  *
  * @package     local_tier
- * @copyright   2024 Krestomatio <info@krestomatio.com>
+ * @copyright   2025 Krestomatio <info@krestomatio.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_tier';
-$plugin->release = '0.0.5';
-$plugin->version = 2024012200;
-$plugin->requires = 2022112804.06;
-$plugin->maturity = MATURITY_ALPHA;
+$plugin->release = '0.1.0';
+$plugin->version = 2025063000;
+$plugin->requires = 2024100700;
+$plugin->maturity = MATURITY_BETA;

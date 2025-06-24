@@ -19,18 +19,45 @@
  *
  * @package     local_tier
  * @category    string
- * @copyright   2024 Krestomatio <info@krestomatio.com>
+ * @copyright   2025 Krestomatio <info@krestomatio.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Plugin Tier';
-$string['privacy:metadata'] = 'Il plugin Tier non memorizza dati personali';
-$string['totaluserstaskname'] = 'Attività Utenti Totali';
-$string['totalstoragetaskname'] = 'Attività Spazio di Archiviazione Totale';
-$string['errormaxstorageuploadfailed'] = 'Caricamento del file non riuscito a causa del raggiungimento del limite massimo di archiviazione. Lo spazio di archiviazione massimo è di {$a->maxstoragebytes} byte, mentre il file {$a->filename} è di {$a->filesize} byte e lo spazio di archiviazione totale attuale è di {$a->totalstoragebytes} byte (compresa la base di dati)';
-$string['errormaxstoragecreateuserfailed'] = 'Creazione dell\'utente non riuscita a causa del raggiungimento del limite massimo di utenti. Il numero massimo di utenti registrati è di {$a->maxregisteredusers}, mentre il numero totale attuale di utenti registrati è di {$a->totalregisteredusers} utenti';
-$string['restrictedadminsettingssection'] = 'Questa sezione delle impostazioni di amministrazione è attualmente restritta per tutti gli utenti come misura precauzionale per evitare configurazioni errate relative alle impostazioni di prestazioni e ottimizzazione';
-$string['restrictedadminsettingscategory'] = 'Questa categoria delle impostazioni di amministrazione è attualmente restritta per tutti gli utenti come misura precauzionale per evitare configurazioni errate relative alle impostazioni di prestazioni e ottimizzazione';
-$string['restrictedadminpage'] = 'Questa pagina delle impostazioni di amministrazione è attualmente restritta per tutti gli utenti come misura precauzionale per evitare configurazioni errate relative alle impostazioni di prestazioni e ottimizzazione';
+$string['pluginname'] = 'Livello di istanza';
+$string['statuspage'] = 'Stato del livello di istanza';
+$string['settingspage'] = 'Impostazioni del livello di istanza';
+$string['privacy:metadata'] = 'Il livello di istanza non memorizza alcun dato personale';
+$string['totalregistereduserstaskname'] = 'Attività totale utenti registrati';
+$string['totalstoragetaskname'] = 'Attività totale spazio archiviazione';
+$string['totalsessionstaskname'] = 'Attività totale sessioni';
+$string['errormaxstorageuploadfailed'] = 'Caricamento del file non riuscito perché è stato raggiunto il limite massimo di archiviazione. Lo spazio massimo è di {$a->maxstoragebytes} byte mentre il file {$a->filename} è di {$a->filesize} byte e lo spazio totale utilizzato è di {$a->totalstoragebytes} byte (incluso database)';
+$string['errormaxstoragecreateuserfailed'] = 'Creazione utente non riuscita perché è stato raggiunto il limite massimo di utenti. Il numero massimo di utenti registrati è {$a->maxregisteredusers} mentre il numero attuale di utenti registrati è {$a->totalregisteredusers}';
+$string['restrictedadminsettingssection'] = 'Questa sezione delle impostazioni di amministrazione è attualmente limitata per tutti gli utenti come misura precauzionale per evitare una configurazione errata delle impostazioni relative a prestazioni e ottimizzazione';
+$string['restrictedadminsettingscategory'] = 'Questa categoria delle impostazioni di amministrazione è attualmente limitata per tutti gli utenti come misura precauzionale per evitare una configurazione errata delle impostazioni relative a prestazioni e ottimizzazione';
+$string['restrictedadminpage'] = 'Questa pagina delle impostazioni di amministrazione è attualmente limitata per tutti gli utenti come misura precauzionale per evitare una configurazione errata delle impostazioni relative a prestazioni e ottimizzazione';
+$string['statusheading'] = 'Stato del livello di istanza';
+$string['statusheadinginfo'] = '
+| Metrica                                | Valore                          |
+| -------------------------------------- | ------------------------------- |
+| Sessioni concorrenti totali&nbsp;&nbsp; | **{$a->totalconcurrentsessions}** |
+| Utenti registrati totali&nbsp;&nbsp;   | **{$a->totalregisteredusers}**    |
+| Spazio totale utilizzato (byte)&nbsp;&nbsp; | **{$a->totalstoragebytes}**      |
+';
+$string['settingsheading'] = 'Impostazioni del livello di istanza';
+$string['settingsheadinginfo'] = 'Le seguenti impostazioni controllano i limiti per questa istanza.';
+$string['maxregisteredusers'] = 'Numero massimo di utenti registrati';
+$string['maxregisteredusersdesc'] = 'Numero massimo di utenti registrati consentiti nell\'istanza. L\'utente amministratore principale non è conteggiato in questo limite.';
+$string['maxstoragebytes'] = 'Spazio di archiviazione massimo in byte';
+$string['maxstoragebytesdesc'] = 'Spazio di archiviazione massimo consentito nell\'istanza in byte. Ciò include tutti i file caricati dagli utenti, nonché la dimensione del database. Se questo limite viene raggiunto, non è possibile caricare nuovi file finché alcuni file esistenti non vengono eliminati completamente (svuotati dal cestino, vedi `filescleanupperiod`) o finché il limite non viene aumentato.';
+$string['maxconcurrentsessions'] = 'Numero massimo di sessioni concorrenti';
+$string['maxconcurrentsessionsdesc'] = 'Numero massimo di sessioni globali concorrenti consentite nell\'istanza. Questo è il numero massimo di sessioni attive che possono essere create contemporaneamente per tutti gli utenti. Se questo limite viene raggiunto, non è possibile creare nuove sessioni finché alcune sessioni esistenti non scadono (vedi `sessiontimeout`), non vengono chiuse o finché il limite non viene aumentato. L\'utente amministratore principale non è conteggiato in questo limite.';
+$string['errormaxconcurrentsessions'] = 'Limite di sessioni concorrenti raggiunto. Non puoi creare una nuova sessione in questo momento. Riprova più tardi. Il limite massimo di sessioni concorrenti è {$a->maxconcurrentsessions} e il numero attuale di sessioni attive è {$a->totalconcurrentsessions}';
+$string['dbtypeunsupported'] = 'Tipo di database "{$a->dbtype}" non supportato';
+$string['restrictedadminsettingscategories'] = 'Categorie di impostazioni di amministrazione limitate';
+$string['restrictedadminsettingscategoriesdesc'] = 'Elenco separato da virgole delle categorie delle impostazioni di amministrazione attualmente limitate per tutti gli utenti. Es.: `cachestores`';
+$string['restrictedadminsettingssections'] = 'Sezioni di impostazioni di amministrazione limitate';
+$string['restrictedadminsettingssectionsdesc'] = 'Elenco separato da virgole delle sezioni delle impostazioni di amministrazione attualmente limitate per tutti gli utenti. Es.: `cachestore_apcu_settings,cachestore_memcached_settings`';
+$string['restrictedadminpages'] = 'Pagine di amministrazione limitate';
+$string['restrictedadminpagesdesc'] = 'Elenco separato da virgole delle pagine di amministrazione attualmente limitate per tutti gli utenti. Es.: `/cache/testperformance.php,/cache/admin.php`';

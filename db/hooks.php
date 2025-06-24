@@ -14,29 +14,29 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace local_tier;
-
 /**
- * The firstclass test class.
+ * Plugin hook listener callbacks are registered here.
  *
  * @package     local_tier
- * @category    test
- * @copyright   2024 Krestomatio <info@krestomatio.com>
+ * @category    hook
+ * @copyright   2025 Krestomatio <info@krestomatio.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class firstclass_test extends \advanced_testcase {
 
-    // Write the tests here as public funcions.
-    // Please refer to {@link https://docs.moodle.org/dev/PHPUnit} for more details on PHPUnit tests in Moodle.
-
-    /**
-     * Dummy test.
-     *
-     * This is to be replaced by some actually usefule test.
-     *
-     * @coversNothing
-     */
-    public function test_dummy() {
-        $this->assertTrue(true);
-    }
-}
+$callbacks = [
+  [
+    'hook' => \core_files\hook\before_file_created::class,
+    'callback' => '\local_tier\hook_callbacks::before_file_created',
+    'priority' => 500,
+  ],
+  [
+    'hook' => \core_user\hook\before_user_created::class,
+    'callback' => '\local_tier\hook_callbacks::before_user_created',
+    'priority' => 500,
+  ],
+  [
+    'hook' => \core_user\hook\after_login_completed::class,
+    'callback' => '\local_tier\hook_callbacks::after_login_completed',
+    'priority' => 500,
+  ],
+];

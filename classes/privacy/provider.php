@@ -17,11 +17,11 @@
 namespace local_tier\privacy;
 
 /**
- * Privacy API implementation for the Tier plugin plugin.
+ * Privacy API implementation for the Tier Instance plugin.
  *
  * @package     local_tier
  * @category    privacy
- * @copyright   2024 Krestomatio <info@krestomatio.com>
+ * @copyright   2025 Krestomatio <info@krestomatio.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\null_provider {
@@ -31,7 +31,7 @@ class provider implements \core_privacy\local\metadata\null_provider {
      *
      * @return string
      */
-    public static function get_reason() : string {
+    public static function get_reason(): string {
         return 'privacy:metadata';
     }
 }

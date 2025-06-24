@@ -19,41 +19,20 @@
  *
  * @package     local_tier
  * @category    admin
- * @copyright   2024 Krestomatio <info@krestomatio.com>
+ * @copyright   2025 Krestomatio <info@krestomatio.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once(__DIR__.'/locallib.php');
-
-/**
- * Before creating a file, check max storage
- * @param mixed $newrecord
- * @param mixed $pathname
- * @param mixed $content
- * @return void
- */
-function local_tier_before_file_created($newrecord, $pathname = null, $content = null) {
-    local_tier_check_max_storage($newrecord, $pathname);
-}
-
-/**
- * Before creating a user, check max registered users
- * @param mixed $user
- * @return void
- */
-function local_tier_pre_user_create($user) {
-    local_tier_check_max_registered_users($user);
-}
-
+// TODO: Move to new hook system when available.
 /**
  * After login required, restrict admin sections
  * @param mixed $courseorid
  * @return void
  */
 function local_tier_after_require_login($courseorid) {
-    local_tier_restrict_admin_settings_section($courseorid);
-    local_tier_restrict_admin_settings_category($courseorid);
-    local_tier_restrict_admin_page();
+    \local_tier\tier::restrict_admin_settings_section($courseorid);
+    \local_tier\tier::restrict_admin_settings_category($courseorid);
+    \local_tier\tier::restrict_admin_page();
 }

@@ -17,7 +17,7 @@
 namespace local_tier\task;
 
 /**
- * Adhoc task that keep track of total storage used.
+ * Adhoc task that keep track of total sessions used.
  *
  * @package     local_tier
  * @category    task
@@ -29,14 +29,14 @@ namespace local_tier\task;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Adhoc task that keep track of total storage used.
+ * Adhoc task that keep track of total sessions used.
  *
  * @package    local_tier
  * @copyright  2025 Krestomatio <https://krestomatio.com/>
  * @author     Job Céspedes Ortiz <jobcespedes@krestomatio.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class total_storage_task extends \core\task\scheduled_task {
+class total_sessions_task extends \core\task\scheduled_task {
 
     /**
      * Return the task's name as shown in admin screens.
@@ -44,13 +44,13 @@ class total_storage_task extends \core\task\scheduled_task {
      * @return string
      */
     public function get_name() {
-        return new \core\lang_string('totalstoragetaskname', 'local_tier');
+        return new \core\lang_string('totalsessionstaskname', 'local_tier');
     }
 
     /**
      * Run the scheduled task and store the totals.
      */
     public function execute() {
-        \local_tier\tier::set_total_storage();
+        \local_tier\tier::set_total_sessions();
     }
 }

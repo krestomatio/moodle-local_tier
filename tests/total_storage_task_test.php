@@ -14,34 +14,29 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
+namespace local_tier;
+
 /**
- * Plugin upgrade steps are defined here.
+ * The total_storage_task test class.
  *
  * @package     local_tier
- * @category    upgrade
+ * @category    test
  * @copyright   2025 Krestomatio <info@krestomatio.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+final class total_storage_task_test extends \advanced_testcase {
 
-defined('MOODLE_INTERNAL') || die();
+    // Write the tests here as public funcions.
+    // Please refer to {@link https://docs.moodle.org/dev/PHPUnit} for more details on PHPUnit tests in Moodle.
 
-require_once(__DIR__.'/upgradelib.php');
-
-/**
- * Execute local_tier upgrade from the given old version.
- *
- * @param int $oldversion
- * @return bool
- */
-function xmldb_local_tier_upgrade($oldversion) {
-    global $DB;
-
-    $dbman = $DB->get_manager();
-
-    // For further information please read {@link https://docs.moodle.org/dev/Upgrade_API}.
-    //
-    // You will also have to create the db/install.xml file by using the XMLDB Editor.
-    // Documentation for the XMLDB Editor can be found at {@link https://docs.moodle.org/dev/XMLDB_editor}.
-
-    return true;
+    /**
+     * Dummy test.
+     *
+     * This is to be replaced by some actually useful test.
+     *
+     * @coversNothing
+     */
+    public function test_dummy(): void {
+        $this->assertTrue(false);
+    }
 }

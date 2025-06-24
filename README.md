@@ -1,27 +1,50 @@
-# Tier plugin #
+## Tier Instance
 
-Tier plugin provides a solution to control user registrations, storage quotas, and administrative access restrictions system-wide in Moodle. By implementing this plugin, site administrators gain the ability to set maximum limits on registered users, file creations, and access to administrative pages and sections based on custom-defined values defined in `config.php`. Once these values are set, the intention is for them to be enforced for all users, even those with administrative roles.
+**Tier Instance** provides Moodle administrators with the ability to enforce limits on user registrations, total storage usage, concurrent active sessions, and administrative page access restrictions. Once configured, these limits apply system-wide, including administrative roles if enforced via `config.php`.
 
-1. User Registration Limitations: Administrators can set a maximum number of registered users. Once the user limit is reached, new users attempting to register will be automatically restricted. __FUNCTION NOT AVAILABLE__ until [MDL-78777](https://tracker.moodle.org/browse/MDL-78777) is integrated in moodle core.
+### Features
 
-2. Site Storage Cap: Tier plugin enables administrators to assign a system wide storage quota based on total files and database size. When the storage quota is reached, users will not be able to add new files, unless storage is reduced by removing files. Total storage in used is calculated every minute in a cron schedule task, avoiding hitting the database to often.
+**1. User Registration Limit**
 
-3. Admin Page/Section Restriction: The plugin allows restricting admin settings sections, categories and/or pages access. This helps prevent misconfiguring performance and optimization-related admin settings.
+Administrators can set a maximum number of allowed registered users. Once the limit is reached, additional user registrations will be automatically blocked. **Note**: This functionality requires [MDL-78777](https://tracker.moodle.org/browse/MDL-78777) to be integrated into Moodle core.
 
-The following example shows how to set max registered users to 100, max site storage to 5 GB (in bytes) and restrict access to debugging admin section and cache configuration and test pages. Values are set `config.php`
+**2. Site Storage Limit**
+
+Administrators can specify a storage quota for the entire Moodle instance, covering both uploaded files and database size. When the quota is reached, uploading new files is disabled until existing files are removed to free up space. Total storage usage is recalculated every minute through a scheduled task to minimize database load. A special consideration should be made for the instance trash. Deleted files go to the trash, which is also counted towards the storage limit. Trash is emptied periodically based on the `filescleanupperiod` setting in Moodle, which defaults to 1 day.
+
+**3. Concurrent Sessions Limit**
+
+Set a global limit on the number of concurrent (active) user sessions. Once this threshold is reached, no new sessions will be allowed until active sessions expire, users log out, or the limit is increased. This ensures system resources remain under control.
+
+**4. Admin Page/Section Restrictions**
+
+Restrict access to specific administrative settings sections, categories, or pages. This helps prevent accidental misconfiguration of sensitive settings related to performance and optimization.
+
+### Configuration Example
+
+Below is an example showing how to set the maximum registered users to 500, storage limit to 5 GB, concurrent sessions limit to 50, and restrict specific admin sections and pages through `config.php`:
 
 ```php
 $CFG->forced_plugin_settings = [
-    "local_tier" => [
-        "max_storage_bytes" => "5000000000",
-        "max_registered_users" => "100",
-        "restrictedadminsettingscategories" => "cachestores",
-        "restrictedadminsettingssections" => "debugging",
-        "restrictedadminpages" => "/cache/testperformance.php,/cache/admin.php",
+    'local_tier' => [
+        'maxstoragebytes' => '5000000000',
+        'maxregisteredusers' => '500',
+        'maxconcurrentsessions' => '50',
+        'restrictedadminsettingscategories' => 'cachestores',
+        'restrictedadminsettingssections' => 'debugging',
+        'restrictedadminpages' => '/cache/testperformance.php,/cache/admin.php',
     ],
 ];
 ```
-You also want to prevent this plugin scheduled task modifications by setting  `$CFG->preventscheduledtaskchanges = true;` in `config.php` or by setting, also in `config.php`:
+
+To prevent modifications to scheduled tasks, use either:
+
+```php
+$CFG->preventscheduledtaskchanges = true;
+```
+
+or configure explicitly:
+
 ```php
 $CFG->scheduled_tasks = [
     'local_tier\*' => [
@@ -31,41 +54,36 @@ $CFG->scheduled_tasks = [
 ];
 ```
 
-## Installing via uploaded ZIP file ##
+### Scheduled Tasks & Caching
 
-1. Log in to your Moodle site as an admin and go to _Site administration >
-   Plugins > Install plugins_.
-2. Upload the ZIP file with the plugin code. You should only be prompted to add
-   extra details if your plugin type is not automatically detected.
-3. Check the plugin validation report and finish the installation.
+Scheduled tasks periodically update usage metrics and store data leveraging Moodle’s built-in caching system. Additionally, event observers promptly update these metrics in response to relevant actions.
 
-## Installing manually ##
+### Installation
 
-The plugin can be also installed by putting the contents of this directory to
+**Install via ZIP upload**
 
-    {your/moodle/dirroot}/local/tier
+1. Log in as an admin and navigate to: *Site administration > Plugins > Install plugins*.
+2. Upload the ZIP file containing the plugin.
+3. Follow the on-screen instructions to validate and finalize the installation.
 
-Afterwards, log in to your Moodle site as an admin and go to _Site administration >
-Notifications_ to complete the installation.
+**Manual installation**
 
-Alternatively, you can run
+Copy the plugin files to:
 
-    $ php admin/cli/upgrade.php
+```
+{your/moodle/dirroot}/local/tier
+```
 
-to complete the installation from the command line.
+Then, log in as admin and navigate to *Site administration > Notifications* to complete the installation.
 
-## License ##
+Alternatively, use CLI:
 
-2024 [Krestomatio](https://krestomatio.com) <info@krestomatio.com>
+```
+php admin/cli/upgrade.php
+```
 
-This program is free software: you can redistribute it and/or modify it under
-the terms of the GNU General Public License as published by the Free Software
-Foundation, either version 3 of the License, or (at your option) any later
-version.
+### License
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+© 2025 [Krestomatio](https://krestomatio.com) [info@krestomatio.com](mailto:info@krestomatio.com)
 
-You should have received a copy of the GNU General Public License along with
-this program.  If not, see <https://www.gnu.org/licenses/>.
+This program is free software distributed under the GNU General Public License version 3 or later. It comes without warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the full license at [GNU GPL v3](https://www.gnu.org/licenses/).
