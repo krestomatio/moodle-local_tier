@@ -16,9 +16,9 @@
 
 namespace local_tier;
 
-use \core_files\hook\before_file_created;
-use \core_user\hook\before_user_created;
-use \core_user\hook\after_login_completed;
+use core_files\hook\before_file_created;
+use core_user\hook\before_user_created;
+use core_user\hook\after_login_completed;
 
 /**
  * Plugin hook listener callbacks.
