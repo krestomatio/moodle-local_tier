@@ -16,16 +16,6 @@
 
 namespace local_tier\task;
 
-/**
- * Adhoc task that keep track of total registered users used.
- *
- * @package     local_tier
- * @category    task
- * @copyright   2025 Krestomatio <info@krestomatio.com>
- * @author     Job Céspedes Ortiz <jobcespedes@krestomatio.com>
- * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 defined('MOODLE_INTERNAL') || die();
 
 /**
