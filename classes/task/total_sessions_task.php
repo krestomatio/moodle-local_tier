@@ -16,8 +16,6 @@
 
 namespace local_tier\task;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Adhoc task that keep track of total sessions used.
  *
