@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $observers = [
-    /** storage events */
+    // storage events
     [
         'eventname' => '\core\event\draft_file_added',
         'callback' => '\local_tier\tier::set_total_storage',
@@ -39,7 +39,7 @@ $observers = [
         'priority' => 500,
         'internal' => false,
     ],
-    /** registered user events */
+    // registered user events
     [
         'eventname' => '\core\event\user_created',
         'callback' => '\local_tier\tier::set_total_registered_users',
@@ -52,7 +52,7 @@ $observers = [
         'priority' => 500,
         'internal' => false,
     ],
-    /** sessions events */
+    // sessions events
     [
         'eventname' => 'core\event\user_loggedin',
         'callback' => '\local_tier\tier::set_total_sessions',
