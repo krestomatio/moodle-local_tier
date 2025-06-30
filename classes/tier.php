@@ -20,7 +20,7 @@ namespace local_tier;
  * Tier class for managing storage and user limits in Moodle.
  *
  * @package     local_tier
- * @category    tier
+ * @category    local
  * @copyright   2025 Krestomatio <info@krestomatio.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
