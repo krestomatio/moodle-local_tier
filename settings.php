@@ -38,17 +38,31 @@ if ($hassiteconfig) {
         // TO-DO: Define actual plugin settings page and add it to the tree - {@link https://docs.moodle.org/dev/Admin_settings}.
 
         // Introductory explanation that all the settings are defaults for the add lesson form.
-        $statuspage->add(new admin_setting_heading('local_tier/statusheading', new \core\lang_string('statusheading', 'local_tier'), new \core\lang_string('statusheadinginfo', 'local_tier', [
-            'totalconcurrentsessions' => \local_tier\tier::get_total_sessions_from_config(),
-            'totalstoragebytes' => \local_tier\tier::get_total_storage_from_config(),
-            'totalregisteredusers' => \local_tier\tier::get_total_registered_users_from_config(),
-        ])));
+        $statuspage->add(new admin_setting_heading(
+            'local_tier/statusheading',
+            new \core\lang_string('statusheading', 'local_tier'),
+            new \core\lang_string('statusheadinginfo', 'local_tier', [
+                'totalconcurrentsessions' => \local_tier\tier::get_total_sessions_from_config(),
+                'totalstoragebytes' => \local_tier\tier::get_total_storage_from_config(),
+                'totalregisteredusers' => \local_tier\tier::get_total_registered_users_from_config(),
+            ])
+        ));
 
         // Introductory explanation that all the settings are defaults for the add lesson form.
-        $settingspage->add(new admin_setting_heading('local_tier/settingsheading', new \core\lang_string('settingsheading', 'local_tier'), new \core\lang_string('settingsheadinginfo', 'local_tier')));
+        $settingspage->add(new admin_setting_heading(
+            'local_tier/settingsheading',
+            new \core\lang_string('settingsheading', 'local_tier'),
+            new \core\lang_string('settingsheadinginfo', 'local_tier')
+        ));
 
         // Add settings for max concurrent sessions.
-        $settingspage->add(new admin_setting_configtext('local_tier/maxconcurrentsessions', new \core\lang_string('maxconcurrentsessions', 'local_tier'), new \core\lang_string('maxconcurrentsessionsdesc', 'local_tier'), 0, PARAM_INT));
+        $settingspage->add(new admin_setting_configtext(
+            'local_tier/maxconcurrentsessions',
+            new \core\lang_string('maxconcurrentsessions', 'local_tier'),
+            new \core\lang_string('maxconcurrentsessionsdesc', 'local_tier'),
+            0,
+            PARAM_INT
+        ));
 
         // Add settings for maximum registered users.
         $settingspage->add(new admin_setting_configtext(
@@ -98,8 +112,4 @@ if ($hassiteconfig) {
             100
         ));
     }
-
-    // $ADMIN->add('local_tier', $settingspage);
-    // $ADMIN->add('local_tier', $statuspage);
-    // $ADMIN->add('localplugins', $category);
 }
