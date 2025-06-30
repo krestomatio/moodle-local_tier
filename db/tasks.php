@@ -23,7 +23,7 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined(constant_name: 'MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die();
 
 $tasks = [
     [
