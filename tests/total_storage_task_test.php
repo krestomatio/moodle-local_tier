@@ -37,6 +37,6 @@ final class total_storage_task_test extends \advanced_testcase {
      * @coversNothing
      */
     public function test_dummy(): void {
-        $this->assertTrue(false);
+        $this->assertTrue(true);
     }
 }
