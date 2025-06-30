@@ -29,13 +29,11 @@ class tier {
     /**
      * Check if max storage has been reached
      * @param mixed $newrecord
-     * @param mixed $pathname
+     * @param mixed $filepath
      * @throws \core\exception\moodle_exception
      * @return void
      */
     public static function check_max_storage($newrecord, $filepath = null) {
-        global $DB;
-
         // If empty pathname, nothing to do.
         if (!$filepath) {
             return;
