@@ -70,7 +70,7 @@ class tier {
      * @return void
      */
     public static function set_total_storage() {
-        // Get storage totals into variable array from get_storage_totals
+        // Get storage totals into variable array from get_storage_totals.
         $storagearray = self::get_storage_totals();
 
         // Store it in moodle config for easy access.
@@ -231,12 +231,12 @@ class tier {
         $timecreated = $session->timecreated ?? 0;
         $timemodified = $session->timemodified ?? 0;
 
-        // if userid is 0 (no user), return
+        // If userid is 0 (no user), return.
         if ($session->userid === 0) {
             return;
         }
 
-        // if userid is 2 (admin), return
+        // If userid is 2, admin, return.
         if ($session->userid === 2) {
             return;
         }
