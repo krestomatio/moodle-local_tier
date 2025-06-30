@@ -25,18 +25,30 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Nivel de instancia';
-$string['statuspage'] = 'Estado del nivel de instancia';
-$string['settingspage'] = 'Configuración del nivel de instancia';
-$string['privacy:metadata'] = 'El nivel de instancia no almacena ningún dato personal';
-$string['totalregistereduserstaskname'] = 'Tarea de total de usuarios registrados';
-$string['totalstoragetaskname'] = 'Tarea de total de almacenamiento';
-$string['totalsessionstaskname'] = 'Tarea de total de sesiones';
-$string['errormaxstorageuploadfailed'] = 'La carga del archivo falló porque se alcanzó el límite máximo de almacenamiento. El almacenamiento máximo es de {$a->maxstoragebytes} bytes mientras que el archivo {$a->filename} tiene {$a->filesize} bytes y el almacenamiento total actual es de {$a->totalstoragebytes} bytes (incluida la base de datos)';
+$string['dbtypeunsupported'] = 'Tipo de base de datos "{$a->dbtype}" no es compatible';
+$string['errormaxconcurrentsessions'] = 'Se alcanzó el límite de sesiones concurrentes. No puede crear una nueva sesión en este momento. Por favor, inténtelo de nuevo más tarde. El límite es de {$a->maxconcurrentsessions} sesiones y el total actual de sesiones activas es de {$a->totalconcurrentsessions}';
 $string['errormaxstoragecreateuserfailed'] = 'La creación de usuario falló porque se alcanzó el límite máximo de usuarios. El máximo de usuarios registrados es de {$a->maxregisteredusers} usuarios mientras que el total actual de usuarios registrados es de {$a->totalregisteredusers} usuarios';
-$string['restrictedadminsettingssection'] = 'Esta sección de configuración de administración está restringida actualmente para todos los usuarios como medida de precaución para evitar configuraciones incorrectas relacionadas con el rendimiento y la optimización';
-$string['restrictedadminsettingscategory'] = 'Esta categoría de configuración de administración está restringida actualmente para todos los usuarios como medida de precaución para evitar configuraciones incorrectas relacionadas con el rendimiento y la optimización';
+$string['errormaxstorageuploadfailed'] = 'La carga del archivo falló porque se alcanzó el límite máximo de almacenamiento. El almacenamiento máximo es de {$a->maxstoragebytes} bytes mientras que el archivo {$a->filename} tiene {$a->filesize} bytes y el almacenamiento total actual es de {$a->totalstoragebytes} bytes (incluida la base de datos)';
+$string['maxconcurrentsessions'] = 'Número máximo de sesiones concurrentes';
+$string['maxconcurrentsessionsdesc'] = 'Número máximo de sesiones concurrentes permitidas en la instancia. Este es el número máximo de sesiones activas que se pueden crear simultáneamente para todos los usuarios. Si se alcanza este límite, no se pueden crear nuevas sesiones hasta que algunas sesiones existentes expiren (vea `sessiontimeout`), se cierren o se aumente el límite. El usuario administrador principal no se cuenta dentro de este límite.';
+$string['maxregisteredusers'] = 'Número máximo de usuarios registrados';
+$string['maxregisteredusersdesc'] = 'Número máximo de usuarios registrados permitido en la instancia. El usuario administrador principal no se cuenta dentro de este límite.';
+$string['maxstoragebytes'] = 'Almacenamiento máximo en bytes';
+$string['maxstoragebytesdesc'] = 'Almacenamiento máximo permitido en la instancia en bytes. Esto incluye todos los archivos subidos por los usuarios, así como el tamaño de la base de datos. Si se alcanza este límite, no se pueden subir archivos nuevos hasta que se eliminen completamente algunos archivos existentes (vacíe la papelera, consulte `filescleanupperiod`) o se aumente el límite.';
+$string['pluginname'] = 'Nivel de instancia';
+$string['privacy:metadata'] = 'El nivel de instancia no almacena ningún dato personal';
 $string['restrictedadminpage'] = 'Esta página de configuración de administración está restringida actualmente para todos los usuarios como medida de precaución para evitar configuraciones incorrectas relacionadas con el rendimiento y la optimización';
+$string['restrictedadminpages'] = 'Páginas de administración restringidas';
+$string['restrictedadminpagesdesc'] = 'Lista separada por comas de páginas de administración que están actualmente restringidas para cualquier usuario. Ej.: `/cache/testperformance.php,/cache/admin.php`';
+$string['restrictedadminsettingscategories'] = 'Categorías de configuración de administración restringidas';
+$string['restrictedadminsettingscategoriesdesc'] = 'Lista separada por comas de categorías de configuración de administración que están actualmente restringidas para cualquier usuario. Ej.: `cachestores`';
+$string['restrictedadminsettingscategory'] = 'Esta categoría de configuración de administración está restringida actualmente para todos los usuarios como medida de precaución para evitar configuraciones incorrectas relacionadas con el rendimiento y la optimización';
+$string['restrictedadminsettingssection'] = 'Esta sección de configuración de administración está restringida actualmente para todos los usuarios como medida de precaución para evitar configuraciones incorrectas relacionadas con el rendimiento y la optimización';
+$string['restrictedadminsettingssections'] = 'Secciones de configuración de administración restringidas';
+$string['restrictedadminsettingssectionsdesc'] = 'Lista separada por comas de secciones de configuración de administración que están actualmente restringidas para cualquier usuario. Ej.: `cachestore_apcu_settings,cachestore_memcached_settings`';
+$string['settingsheading'] = 'Configuración del nivel de instancia';
+$string['settingsheadinginfo'] = 'Las siguientes configuraciones controlan los límites para esta instancia.';
+$string['settingspage'] = 'Configuración del nivel de instancia';
 $string['statusheading'] = 'Estado del nivel de instancia';
 $string['statusheadinginfo'] = '
 | Métrica                                | Valor                          |
@@ -45,19 +57,7 @@ $string['statusheadinginfo'] = '
 | Total de usuarios registrados&nbsp;&nbsp; | **{$a->totalregisteredusers}**    |
 | Total de almacenamiento usado (bytes)&nbsp;&nbsp; | **{$a->totalstoragebytes}**      |
 ';
-$string['settingsheading'] = 'Configuración del nivel de instancia';
-$string['settingsheadinginfo'] = 'Las siguientes configuraciones controlan los límites para esta instancia.';
-$string['maxregisteredusers'] = 'Número máximo de usuarios registrados';
-$string['maxregisteredusersdesc'] = 'Número máximo de usuarios registrados permitido en la instancia. El usuario administrador principal no se cuenta dentro de este límite.';
-$string['maxstoragebytes'] = 'Almacenamiento máximo en bytes';
-$string['maxstoragebytesdesc'] = 'Almacenamiento máximo permitido en la instancia en bytes. Esto incluye todos los archivos subidos por los usuarios, así como el tamaño de la base de datos. Si se alcanza este límite, no se pueden subir archivos nuevos hasta que se eliminen completamente algunos archivos existentes (vacíe la papelera, consulte `filescleanupperiod`) o se aumente el límite.';
-$string['maxconcurrentsessions'] = 'Número máximo de sesiones concurrentes';
-$string['maxconcurrentsessionsdesc'] = 'Número máximo de sesiones concurrentes permitidas en la instancia. Este es el número máximo de sesiones activas que se pueden crear simultáneamente para todos los usuarios. Si se alcanza este límite, no se pueden crear nuevas sesiones hasta que algunas sesiones existentes expiren (vea `sessiontimeout`), se cierren o se aumente el límite. El usuario administrador principal no se cuenta dentro de este límite.';
-$string['errormaxconcurrentsessions'] = 'Se alcanzó el límite de sesiones concurrentes. No puede crear una nueva sesión en este momento. Por favor, inténtelo de nuevo más tarde. El límite es de {$a->maxconcurrentsessions} sesiones y el total actual de sesiones activas es de {$a->totalconcurrentsessions}';
-$string['dbtypeunsupported'] = 'Tipo de base de datos "{$a->dbtype}" no es compatible';
-$string['restrictedadminsettingscategories'] = 'Categorías de configuración de administración restringidas';
-$string['restrictedadminsettingscategoriesdesc'] = 'Lista separada por comas de categorías de configuración de administración que están actualmente restringidas para cualquier usuario. Ej.: `cachestores`';
-$string['restrictedadminsettingssections'] = 'Secciones de configuración de administración restringidas';
-$string['restrictedadminsettingssectionsdesc'] = 'Lista separada por comas de secciones de configuración de administración que están actualmente restringidas para cualquier usuario. Ej.: `cachestore_apcu_settings,cachestore_memcached_settings`';
-$string['restrictedadminpages'] = 'Páginas de administración restringidas';
-$string['restrictedadminpagesdesc'] = 'Lista separada por comas de páginas de administración que están actualmente restringidas para cualquier usuario. Ej.: `/cache/testperformance.php,/cache/admin.php`';
+$string['statuspage'] = 'Estado del nivel de instancia';
+$string['totalregistereduserstaskname'] = 'Tarea de total de usuarios registrados';
+$string['totalsessionstaskname'] = 'Tarea de total de sesiones';
+$string['totalstoragetaskname'] = 'Tarea de total de almacenamiento';
