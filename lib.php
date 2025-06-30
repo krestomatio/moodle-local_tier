@@ -23,8 +23,6 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 // TODO: Move to new hook system when available.
 /**
  * After login required, restrict admin sections

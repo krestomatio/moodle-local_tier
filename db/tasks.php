@@ -23,6 +23,8 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined(constant_name: 'MOODLE_INTERNAL') || die();
+
 $tasks = [
     [
         'classname' => 'local_tier\task\total_registered_users_task',
